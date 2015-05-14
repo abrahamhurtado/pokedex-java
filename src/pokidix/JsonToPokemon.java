@@ -12,6 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,7 +68,7 @@ public class JsonToPokemon {
 
         JsonArray array = null;
         try {
-            array = (JsonArray) parser.parse(new FileReader("C:/Users/TOSHIBA/Documents/Pokedex/Pokedex/resources/pokemon.json"));
+            array = (JsonArray) parser.parse(new FileReader(new File("resources/pokemon.json").getAbsolutePath()));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(JsonToPokemon.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,14 +79,14 @@ public class JsonToPokemon {
     public ArrayList<Pokemon> crearPokemon() throws FileNotFoundException {
 
         JsonParser parser = new JsonParser();
-        JsonArray a = (JsonArray) parser.parse(new FileReader("C:/Users/TOSHIBA/Documents/Pokedex/Pokedex/resources/pokemon.json"));
+        JsonArray a = (JsonArray) parser.parse(new FileReader(new File("resources/pokemon.json").getAbsolutePath()));
         ArrayList<Pokemon> Pokemans = new ArrayList();
         for (Object o : a) {
             JsonObject poke = (JsonObject) o;
             String nombre = poke.get("name").toString().replace("\"", "");
             String[] tipos = convertStringToArray(poke.get("type").toString());
             String id = (poke.get("id").toString().replace("\"", ""));
-            ImageIcon icono = new ImageIcon("C:/Users/TOSHIBA/Documents/Pokedex/Pokedex/resources/pokemons/" + normalizarNombre(nombre) + ".jpg");
+            ImageIcon icono = new ImageIcon(new File("resources/pokemons/").getAbsolutePath() + "\\" + normalizarNombre(nombre) + ".jpg");
             String altura = poke.get("height").toString().replace("\"", "");
             String peso = poke.get("weight").toString().replace("\"", "");
             String[] habilidades = convertStringToArray(poke.get("abilities").toString());
@@ -103,7 +104,7 @@ public class JsonToPokemon {
         String nombre = poke.get("name").toString().replace("\"", "");
         String[] tipos = convertStringToArray(poke.get("type").toString());
         String id = (poke.get("id").toString().replace("\"", ""));
-        ImageIcon icono = new ImageIcon("C:/Users/TOSHIBA/Documents/Pokedex/Pokedex/resources/pokemons/" + normalizarNombre(nombre) + ".jpg");
+        ImageIcon icono = new ImageIcon(new File("resources/pokemons/").getAbsolutePath() + "\\" + normalizarNombre(nombre) + ".jpg");
         String altura = poke.get("height").toString().replace("\"", "");
         String peso = poke.get("weight").toString().replace("\"", "");
         String[] habilidades = convertStringToArray(poke.get("abilities").toString());
