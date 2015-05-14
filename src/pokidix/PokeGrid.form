@@ -109,7 +109,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="evolutionLabel" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="599" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="629" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -163,6 +163,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="type1Label">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="setColor(type1Label.getText())" type="code"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Tipo1"/>
       </Properties>
     </Component>

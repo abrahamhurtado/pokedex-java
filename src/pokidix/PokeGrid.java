@@ -87,6 +87,7 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
 
         jLabel6.setText("Especie");
 
+        type1Label.setBackground(setColor(type1Label.getText()));
         type1Label.setText("Tipo1");
 
         habilidad1Label.setText("Habilidad1");
@@ -197,7 +198,7 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(evolutionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

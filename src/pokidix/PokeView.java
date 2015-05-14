@@ -114,7 +114,7 @@ public class PokeView extends JPanel implements ListCellRenderer<Pokemon> {
         setPokemon(e);
 
         if (isSelected) {
-            
+
             this.setBackground(java.awt.SystemColor.controlHighlight);
         } else {
             this.setBackground(java.awt.SystemColor.control);
@@ -122,53 +122,70 @@ public class PokeView extends JPanel implements ListCellRenderer<Pokemon> {
 
         return this;
     }
-    
+
     public Color setColor(String type) {
         Color color;
         switch (type) {
-            case "Grass":   color = Color.decode("0x9BCC50");
-                            break;
-            case "Poison":  color = Color.MAGENTA;
-                            break;
-            case "Dark":    color = Color.decode("#707070");
-                            break;
-            case "Bug":     color = Color.decode("#729f3f");
-                            break;
-            case "Ice":     color = Color.decode("#51c4e7");
-                            break;
-            case "Psychic": color = Color.decode("#f366b9");
-                            break;
-            case "Steel":   color = Color.decode("#9eb7b8");
-                            break;
-            case "Rock":    color = Color.decode("#a38c21");
-                            break;
-            case "Flying":  color = Color.decode("#3dc7ef");
-                            break;
-            case "Ghost":   color = Color.decode("#7b62a3");
-                            break;
-            case "Water":   color = Color.decode("#4592c4");
-                            break;
-            case "Fire":    color = Color.decode("#fd7d24");
-                            break;
-            case "Ground":  color = Color.decode("#f7de3f");
-                            break;
-            case "Normal":  color = Color.decode("#a4acaf");
-                            break;
-            case "Electric":color = Color.decode("#eed535");
-                            break;
-            case "Fighting":color = Color.decode("#d56723");
-                            break;
-            case "Dragon":  color = Color.decode ("#53a4cf");
-                            break;
-            case "Fairy":   color = Color.decode("#fdb9e9");
-                            break;
-                
-            default:        color = Color.white;
-                            break;
+            case "Grass":
+                color = Color.decode("0x9BCC50");
+                break;
+            case "Poison":
+                color = Color.MAGENTA;
+                break;
+            case "Dark":
+                color = Color.decode("#707070");
+                break;
+            case "Bug":
+                color = Color.decode("#729f3f");
+                break;
+            case "Ice":
+                color = Color.decode("#51c4e7");
+                break;
+            case "Psychic":
+                color = Color.decode("#f366b9");
+                break;
+            case "Steel":
+                color = Color.decode("#9eb7b8");
+                break;
+            case "Rock":
+                color = Color.decode("#a38c21");
+                break;
+            case "Flying":
+                color = Color.decode("#3dc7ef");
+                break;
+            case "Ghost":
+                color = Color.decode("#7b62a3");
+                break;
+            case "Water":
+                color = Color.decode("#4592c4");
+                break;
+            case "Fire":
+                color = Color.decode("#fd7d24");
+                break;
+            case "Ground":
+                color = Color.decode("#f7de3f");
+                break;
+            case "Normal":
+                color = Color.decode("#a4acaf");
+                break;
+            case "Electric":
+                color = Color.decode("#eed535");
+                break;
+            case "Fighting":
+                color = Color.decode("#d56723");
+                break;
+            case "Dragon":
+                color = Color.decode("#53a4cf");
+                break;
+            case "Fairy":
+                color = Color.decode("#fdb9e9");
+                break;
+            default:
+                color = Color.white;
+                break;
         }
         return color;
-        
+
     }
-    
-    
+
 }
