@@ -5,20 +5,13 @@
  */
 package pokidix;
 
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 import javax.swing.AbstractListModel;
-import javax.swing.ListModel;
-import javax.swing.event.ListDataListener;
 
 /**
  *
@@ -82,13 +75,16 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
         habilidad3Label.setText("Habilidad3");
 
         type2Label.setText("Tipo2");
+        type2Label.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        type2Label.setOpaque(true);
 
         habilidad2Label.setText("Habilidad2");
 
         jLabel6.setText("Especie");
 
-        type1Label.setBackground(setColor(type1Label.getText()));
         type1Label.setText("Tipo1");
+        type1Label.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        type1Label.setOpaque(true);
 
         habilidad1Label.setText("Habilidad1");
 
@@ -320,11 +316,12 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
         artworkLabel.setText("");
         artworkLabel.setIcon(pokemon.getArtwork());
         type1Label.setText(pokemon.getTypes()[0]);
-        type1Label.setBackground(setColor(type1Label.getText()));
+        type1Label.setBackground(getColor(type1Label.getText()));
         type2Label.setText("");
         if (pokemon.getTypes().length == 2) {
             type2Label.setText(pokemon.getTypes()[1]);
         }
+        type2Label.setBackground(getColor(type2Label.getText()));
         especieLabel.setText(pokemon.getSpecies());
         alturaLabel.setText(pokemon.getHeight());
         pesoLabel.setText(pokemon.getWeight());

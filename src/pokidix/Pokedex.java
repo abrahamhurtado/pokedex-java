@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -56,21 +58,28 @@ public class Pokedex extends javax.swing.JFrame {
             }
         };
 
-        MouseListener mouseListener = new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) {
-
-                    pokeGrid.setPokemon((Pokemon) pokemonList.getSelectedValue());
-
-                }
-            }
-        };
+//        MouseListener mouseListener = new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                if (e.getClickCount() == 1) {
+//
+//                    pokeGrid.setPokemon((Pokemon) pokemonList.getSelectedValue());
+//
+//                }
+//            }
+//        };
 
         pokemonList.setModel(listModel);
         pokemonList.setLayoutOrientation(0);
         pokemonList.setCellRenderer(new PokeView());
-        pokemonList.addMouseListener(mouseListener);
+//        pokemonList.addMouseListener(mouseListener);
+        pokemonList.addListSelectionListener(new ListSelectionListener(){
+
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                pokeGrid.setPokemon((Pokemon) pokemonList.getSelectedValue());
+            }
+        });
 
         pokeGrid.setPokemon((Pokemon) listModel.getElementAt(0));
         

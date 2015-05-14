@@ -101,11 +101,11 @@ public class PokeView extends JPanel implements ListCellRenderer<Pokemon> {
         artworkLabel.setText("");
         artworkLabel.setIcon(pokemon.getArtwork());
         type1Label.setText(pokemon.getTypes()[0]);
-        type1Label.setBackground(setColor(type1Label.getText()));
+        type1Label.setBackground(getColor(type1Label.getText()));
         type2Label.setText("");
-        type2Label.setBackground(setColor(type2Label.getText()));
         if (pokemon.getTypes().length == 2) {
             type2Label.setText(pokemon.getTypes()[1]);
+            type2Label.setBackground(getColor(type2Label.getText()));
         }
     }
 
@@ -123,8 +123,8 @@ public class PokeView extends JPanel implements ListCellRenderer<Pokemon> {
         return this;
     }
 
-    public Color setColor(String type) {
-        Color color;
+    public Color getColor(String type) {
+        Color color = new Color(0,0,0,0);
         switch (type) {
             case "Grass":
                 color = Color.decode("0x9BCC50");
@@ -180,9 +180,7 @@ public class PokeView extends JPanel implements ListCellRenderer<Pokemon> {
             case "Fairy":
                 color = Color.decode("#fdb9e9");
                 break;
-            default:
-                color = Color.white;
-                break;
+            
         }
         return color;
 
