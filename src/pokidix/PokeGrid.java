@@ -65,7 +65,7 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
         alturaLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         pesoLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        evolutionLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         evolutionList = new javax.swing.JList();
 
@@ -101,7 +101,7 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
 
         pesoLabel.setText("Peso");
 
-        jLabel2.setText("Evoluciones");
+        evolutionLabel.setText("Línea evolutiva");
 
         evolutionList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -154,7 +154,7 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
                             .addComponent(alturaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pesoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(evolutionLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -195,7 +195,7 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statsPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(evolutionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                 .addContainerGap())
@@ -203,14 +203,19 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
     }// </editor-fold>//GEN-END:initComponents
 
     private void evolutionListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_evolutionListMouseClicked
-        System.out.println("FUNCIONO ESTA MADRE");
-    }//GEN-LAST:event_evolutionListMouseClicked
+        // TODO add your handling code here:
+        try {
+            setPokemon(((Pokemon) evolutionList.getSelectedValue()));
+        } catch (NullPointerException ex) {
 
+        }
+    }//GEN-LAST:event_evolutionListMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel alturaLabel;
     private javax.swing.JLabel artworkLabel;
     private javax.swing.JLabel especieLabel;
+    private javax.swing.JLabel evolutionLabel;
     private javax.swing.JList evolutionList;
     private javax.swing.JLabel habilidad1Label;
     private javax.swing.JLabel habilidad2Label;
@@ -218,7 +223,6 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
     private javax.swing.JLabel habilidadesLabel;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
@@ -229,20 +233,6 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
     private javax.swing.JLabel type1Label;
     private javax.swing.JLabel type2Label;
     // End of variables declaration//GEN-END:variables
-
-//    MouseListener mouseListener = new MouseAdapter() {
-//        @Override
-//        public void mouseClicked(MouseEvent e) {
-//            if (e.getClickCount() == 1) {
-//                System.out.println("CLICK");
-//                Pokemon poke = (Pokemon) evolutionList.getSelectedValue();
-//
-//                setPokemon(poke);
-//
-//            }
-//        }
-//    };
-    
 
     public AbstractListModel createModel(Pokemon pokemon, int posicion) throws FileNotFoundException {
         listModel = new javax.swing.AbstractListModel() {
@@ -323,25 +313,6 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Pokemon> jlist, Pokemon e, int i, boolean isSelected, boolean bln1) {
-        setPokemon(e);
-        statsPanel1.setPokemon(e);
-//        if (e.getEvolutions().length == 0) {
-//            evolutionList.setToolTipText("No tiene evoluciones conocidas.");
-//        } else {
-//            try {
-//                evolutionList.setModel(createModel(e, Integer.parseInt(e.getId()) - 1));
-//                evolutionList.setCellRenderer(new evolutionPanel());
-//                evolutionList.addMouseListener(mouseListener);
-//            } catch (FileNotFoundException ex) {
-//                Logger.getLogger(PokeGrid.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-        return this;
-
-    }
-
-    @Override
     public void setPokemon(Pokemon pokemon) {
         idLabel.setText("" + pokemon.getId());
         nameLabel.setText(pokemon.getName());
@@ -367,6 +338,17 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
         } else {
             habilidad2Label.setVisible(false);
             habilidad3Label.setVisible(false);
+        }
+        statsPanel1.setPokemon(pokemon);
+        if (pokemon.getEvolutions().length != 0) {
+            try {
+                evolutionList.setModel(createModel(pokemon, Integer.parseInt(pokemon.getId()) - 1));
+                evolutionList.setCellRenderer(new evolutionPanel());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PokeGrid.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            evolutionList.setCellRenderer(new NoEvolutionFound());
         }
     }
 

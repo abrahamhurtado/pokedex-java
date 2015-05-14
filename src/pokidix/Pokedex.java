@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 public class Pokedex extends javax.swing.JFrame {
 
     AbstractListModel listModel;
-    AbstractListModel listModel2;
 
     /**
      * Creates new form Pokedex
@@ -31,10 +30,10 @@ public class Pokedex extends javax.swing.JFrame {
      * @throws java.io.FileNotFoundException
      */
     public Pokedex() throws FileNotFoundException {
-        
+
         titlePanel = new JPanel();
         titlePanel.setBackground(Color.red);
-        
+
         try {
             initComponents();
         } catch (ClassCastException ex) {
@@ -55,43 +54,12 @@ public class Pokedex extends javax.swing.JFrame {
             }
         };
 
-        listModel2 = new javax.swing.AbstractListModel() {
-            ArrayList<Pokemon> data = new JsonToPokemon().crearPokemon(new JsonToPokemon().parseJson(), 0);
-
-            @Override
-            public int getSize() {
-                return data.size();
-            }
-
-            @Override
-            public Object getElementAt(int i) {
-                return data.get(i);
-            }
-
-        };
-
         MouseListener mouseListener = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
 
-                    Pokemon poke = (Pokemon) pokemonList.getSelectedValue();
-
-                    AbstractListModel listModel3 = new javax.swing.AbstractListModel() {
-                        ArrayList<Pokemon> data = new JsonToPokemon().crearPokemon(new JsonToPokemon().parseJson(), Integer.parseInt(poke.getId()) - 1);
-
-                        @Override
-                        public int getSize() {
-                            return data.size();
-                        }
-
-                        @Override
-                        public Object getElementAt(int i) {
-                            return data.get(i);
-                        }
-
-                    };
-                    pokeGrid.setModel(listModel3);
+                    pokeGrid.setPokemon((Pokemon) pokemonList.getSelectedValue());
 
                 }
             }
@@ -102,8 +70,9 @@ public class Pokedex extends javax.swing.JFrame {
         pokemonList.setCellRenderer(new PokeView());
         pokemonList.addMouseListener(mouseListener);
 
-        pokeGrid.setModel(listModel2);
-        pokeGrid.setCellRenderer(new PokeGrid());
+        pokeGrid.setPokemon((Pokemon) listModel.getElementAt(0));
+        
+        jScrollPane2.setViewportView(pokeGrid);
 
     }
 
@@ -118,13 +87,17 @@ public class Pokedex extends javax.swing.JFrame {
 
         jLabel9 = new javax.swing.JLabel();
         pokemonContainer = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        pokeGrid = new javax.swing.JList();
         titlePanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         pokeballLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pokemonList = new javax.swing.JList();
+        try {
+            pokeGrid = new pokidix.PokeGrid();
+        } catch (java.io.FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
+        jScrollPane2 = new javax.swing.JScrollPane();
 
         jLabel9.setText("jLabel5");
 
@@ -134,24 +107,12 @@ public class Pokedex extends javax.swing.JFrame {
         pokemonContainer.setLayout(pokemonContainerLayout);
         pokemonContainerLayout.setHorizontalGroup(
             pokemonContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pokemonContainerLayout.setVerticalGroup(
             pokemonContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        pokeGrid.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        pokeGrid.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pokeGridMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(pokeGrid);
 
         titleLabel.setText("POKÉDEX");
 
@@ -193,8 +154,11 @@ public class Pokedex extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pokemonContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pokeGrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -207,20 +171,19 @@ public class Pokedex extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(pokemonContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pokeGrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(23, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void pokeGridMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pokeGridMouseClicked
-        System.out.println(pokeGrid.getSelectedValue().toString());
-    }//GEN-LAST:event_pokeGridMouseClicked
 
     /**
      * @param args the command line arguments
@@ -270,7 +233,7 @@ public class Pokedex extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList pokeGrid;
+    private pokidix.PokeGrid pokeGrid;
     private javax.swing.JLabel pokeballLabel;
     private javax.swing.JPanel pokemonContainer;
     private javax.swing.JList pokemonList;

@@ -56,7 +56,7 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="evolutionLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -107,7 +107,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="statsPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="30" max="-2" attributes="0"/>
+              <Component id="evolutionLabel" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="599" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -198,9 +198,9 @@
         <Property name="text" type="java.lang.String" value="Peso"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="evolutionLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Evoluciones"/>
+        <Property name="text" type="java.lang.String" value="L&#xed;nea evolutiva"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

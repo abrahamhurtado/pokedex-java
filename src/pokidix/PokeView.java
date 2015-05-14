@@ -166,7 +166,6 @@ public class PokeView extends JPanel implements ListCellRenderer<Pokemon> {
             default:        color = Color.white;
                             break;
         }
-//        System.out.println(color.toString());
         return color;
         
     }

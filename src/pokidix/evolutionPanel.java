@@ -6,19 +6,15 @@
 package pokidix;
 
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.io.FileNotFoundException;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import javax.swing.Scrollable;
 
 /**
  *
  * @author TOSHIBA
  */
-public class evolutionPanel extends PokeGrid implements ListCellRenderer<Pokemon>, Scrollable {
+public class evolutionPanel extends PokeGrid implements ListCellRenderer<Pokemon> {
 
     /**
      * Creates new form evolutionPanel
@@ -80,40 +76,6 @@ public class evolutionPanel extends PokeGrid implements ListCellRenderer<Pokemon
     @Override
     public Component getListCellRendererComponent(JList<? extends Pokemon> jlist, Pokemon e, int i, boolean isSelected, boolean cellHasFocus) {
         setPokemon(e);
-//        getScrollableTracksViewportWidth();
-
-        if (isSelected) {
-            this.setBackground(java.awt.SystemColor.controlHighlight);
-        } else {
-            this.setBackground(java.awt.SystemColor.control);
-        }
-
         return this;
-    }
-
-    @Override
-    public Dimension getPreferredScrollableViewportSize() {
-        return getPreferredSize();
-    }
-
-    @Override
-    public int getScrollableUnitIncrement(Rectangle rctngl, int i, int i1) {
-        return 10;
-    }
-
-    @Override
-    public int getScrollableBlockIncrement(Rectangle rctngl, int i, int i1) {
-        return rctngl.width;
-    }
-
-    @Override
-    public boolean getScrollableTracksViewportWidth() {
-        super.getName();
-        return 40 < getPreferredSize().width;
-    }
-
-    @Override
-    public boolean getScrollableTracksViewportHeight() {
-        return 90 < getPreferredSize().height;
     }
 }
