@@ -25,9 +25,9 @@
                       <Component id="nameLabel" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="type1Label" min="-2" pref="122" max="-2" attributes="0"/>
+                      <Component id="type1Label" min="-2" pref="117" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="type2Label" max="32767" attributes="0"/>
+                      <Component id="type2Label" min="-2" pref="125" max="-2" attributes="0"/>
                   </Group>
                   <Component id="artworkLabel" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
               </Group>
@@ -46,9 +46,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="artworkLabel" min="-2" pref="200" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="type1Label" alignment="3" pref="25" max="32767" attributes="0"/>
-                  <Component id="type2Label" alignment="3" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="type2Label" pref="25" max="32767" attributes="0"/>
+                  <Component id="type1Label" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -76,11 +76,13 @@
     <Component class="javax.swing.JLabel" name="type1Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo 1"/>
+        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="type2Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo 2"/>
+        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
   </SubComponents>

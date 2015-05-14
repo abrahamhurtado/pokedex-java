@@ -34,8 +34,6 @@ public class Pokedex extends javax.swing.JFrame {
      */
     public Pokedex() throws FileNotFoundException {
 
-        titlePanel = new JPanel();
-        titlePanel.setBackground(Color.red);
         PokeGrid pokeGrid = new PokeGrid();
 
         try {
@@ -58,22 +56,10 @@ public class Pokedex extends javax.swing.JFrame {
             }
         };
 
-//        MouseListener mouseListener = new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                if (e.getClickCount() == 1) {
-//
-//                    pokeGrid.setPokemon((Pokemon) pokemonList.getSelectedValue());
-//
-//                }
-//            }
-//        };
-
         pokemonList.setModel(listModel);
         pokemonList.setLayoutOrientation(0);
         pokemonList.setCellRenderer(new PokeView());
-//        pokemonList.addMouseListener(mouseListener);
-        pokemonList.addListSelectionListener(new ListSelectionListener(){
+        pokemonList.addListSelectionListener(new ListSelectionListener() {
 
             @Override
             public void valueChanged(ListSelectionEvent lse) {
@@ -82,7 +68,7 @@ public class Pokedex extends javax.swing.JFrame {
         });
 
         pokeGrid.setPokemon((Pokemon) listModel.getElementAt(0));
-        
+
         jScrollPane2.setViewportView(pokeGrid);
         jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -99,12 +85,10 @@ public class Pokedex extends javax.swing.JFrame {
 
         jLabel9 = new javax.swing.JLabel();
         pokemonContainer = new javax.swing.JPanel();
-        titlePanel = new javax.swing.JPanel();
-        titleLabel = new javax.swing.JLabel();
-        pokeballLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pokemonList = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel9.setText("jLabel5");
 
@@ -114,32 +98,11 @@ public class Pokedex extends javax.swing.JFrame {
         pokemonContainer.setLayout(pokemonContainerLayout);
         pokemonContainerLayout.setHorizontalGroup(
             pokemonContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1, Short.MAX_VALUE)
         );
         pokemonContainerLayout.setVerticalGroup(
             pokemonContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        titleLabel.setText("POKÉDEX");
-
-        pokeballLabel.setText("jLabel2");
-
-        javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
-        titlePanel.setLayout(titlePanelLayout);
-        titlePanelLayout.setHorizontalGroup(
-            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(titlePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pokeballLabel)
-                .addGap(19, 19, 19)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        titlePanelLayout.setVerticalGroup(
-            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-            .addComponent(pokeballLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pokemonList.setModel(new javax.swing.AbstractListModel() {
@@ -149,14 +112,18 @@ public class Pokedex extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(pokemonList);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\TOSHIBA\\Documents\\Pokedex\\pokidix\\resources\\logo.png")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -167,19 +134,19 @@ public class Pokedex extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(94, 94, 94)
                         .addComponent(pokemonContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
@@ -231,14 +198,12 @@ public class Pokedex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel pokeballLabel;
     private javax.swing.JPanel pokemonContainer;
     private javax.swing.JList pokemonList;
-    private javax.swing.JLabel titleLabel;
-    private javax.swing.JPanel titlePanel;
     // End of variables declaration//GEN-END:variables
 
 }
