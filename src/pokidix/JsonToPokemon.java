@@ -23,15 +23,13 @@ import java.util.logging.Logger;
 public class JsonToPokemon {
 
     public String[] convertStringToArray(String stringToArray) {
-        
-        
-        
+
         stringToArray = stringToArray.replace("[", "");
         stringToArray = stringToArray.replace("]", "");
         stringToArray = stringToArray.replace("\"", "");
 
-        String[] types = stringToArray.split(",");        
-        
+        String[] types = stringToArray.split(",");
+
         return types;
     }
 
@@ -40,7 +38,7 @@ public class JsonToPokemon {
         for (String element : arrayToString) {
             types = types + element + "/";
         }
-        
+
         return types;
     }
 
