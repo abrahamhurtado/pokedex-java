@@ -6,15 +6,19 @@
 package pokidix;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.io.FileNotFoundException;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import javax.swing.Scrollable;
+import pokidix.models.Pokemon;
 
 /**
  *
  * @author TOSHIBA
  */
-public class evolutionPanel extends PokeGrid implements ListCellRenderer<Pokemon> {
+public class evolutionPanel extends PokeGrid implements ListCellRenderer<Pokemon>, Scrollable {
 
     /**
      * Creates new form evolutionPanel
@@ -77,5 +81,31 @@ public class evolutionPanel extends PokeGrid implements ListCellRenderer<Pokemon
     public Component getListCellRendererComponent(JList<? extends Pokemon> jlist, Pokemon e, int i, boolean isSelected, boolean cellHasFocus) {
         setPokemon(e);
         return this;
+    }
+
+    @Override
+    public Dimension getPreferredScrollableViewportSize() {
+        System.out.println(super.getPreferredSize());
+        return super.getPreferredSize();
+    }
+
+    @Override
+    public int getScrollableUnitIncrement(Rectangle rctngl, int i, int i1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getScrollableBlockIncrement(Rectangle rctngl, int i, int i1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportWidth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportHeight() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
@@ -21,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import pokidix.models.PokemonParser;
+import pokidix.models.Pokemon;
 
 /**
  *
@@ -29,6 +32,8 @@ import javax.swing.event.ListSelectionListener;
 public class Pokedex extends javax.swing.JFrame {
 
     AbstractListModel listModel;
+    
+    ArrayList<pokidix.models.Pokemon> newPokemonList;
 
     /**
      * Creates new form Pokedex
@@ -44,18 +49,20 @@ public class Pokedex extends javax.swing.JFrame {
         } catch (ClassCastException ex) {
 
         }
+        
+        newPokemonList = (ArrayList<pokidix.models.Pokemon>) PokemonParser.getAllPokemons();
 
         listModel = new javax.swing.AbstractListModel() {
-            ArrayList<Pokemon> data = new JsonToPokemon().crearPokemon();
+            //ArrayList<Pokemon> data = new JsonToPokemon().crearPokemon();
 
             @Override
             public int getSize() {
-                return data.size();
+                return newPokemonList.size();
             }
 
             @Override
             public Object getElementAt(int i) {
-                return data.get(i);
+                return newPokemonList.get(i);
             }
         };
 
@@ -70,7 +77,7 @@ public class Pokedex extends javax.swing.JFrame {
             }
         });
 
-        pokeGrid.setPokemon((Pokemon) listModel.getElementAt(0));
+        pokeGrid.setPokemon((pokidix.models.Pokemon) listModel.getElementAt(0));
 
         jScrollPane2.setViewportView(pokeGrid);
         jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -237,7 +244,8 @@ public class Pokedex extends javax.swing.JFrame {
             ArrayList<Pokemon> evoluciones = obtainPokemonByName(name);
 
             public ArrayList<Pokemon> obtainPokemonByName(String name) throws FileNotFoundException {
-                ArrayList<Pokemon> data = new JsonToPokemon().crearPokemon();
+                //ArrayList<Pokemon> data = new JsonToPokemon().crearPokemon();
+                ArrayList<pokidix.models.Pokemon> data = (ArrayList<pokidix.models.Pokemon>) PokemonParser.getAllPokemons();
                 ArrayList<Pokemon> pokes = new ArrayList();
 
                 for (Pokemon data1 : data) {

@@ -5,6 +5,8 @@
  */
 package pokidix;
 
+import pokidix.models.Stats;
+
 /**
  *
  * @author TOSHIBA
@@ -202,21 +204,23 @@ public class statsPanel extends PokeView {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void setPokemon(Pokemon pokemon) {
-        hpBar.setValue(pokemon.getStats()[0]);
-        hpLabel.setText("" + pokemon.getStats()[0]);
-        attackBar.setValue(pokemon.getStats()[1]);
-        attackLabel.setText("" + pokemon.getStats()[1]);
-        defenseBar.setValue(pokemon.getStats()[2]);
-        defenseLabel.setText("" + pokemon.getStats()[2]);
-        spAttackBar.setValue(pokemon.getStats()[3]);
-        spAttackLabel.setText("" + pokemon.getStats()[3]);
-        spDefenseBar.setValue(pokemon.getStats()[4]);
-        spDefenseLabel.setText("" + pokemon.getStats()[4]);
-        speedBar.setValue(pokemon.getStats()[5]);
-        speedLabel.setText("" + pokemon.getStats()[5]);
-        totalLabel.setText("" + pokemon.getStats()[6]);
+    public void setPokemon(pokidix.models.Pokemon pokemon) {
+        Stats stats = pokemon.getStats();
+        
+        hpBar.setValue(stats.getHp());
+        hpLabel.setText(String.valueOf(stats.getHp()));
+        attackBar.setValue(stats.getAttack());
+        attackLabel.setText(String.valueOf(stats.getAttack()));
+        defenseBar.setValue(stats.getDefense());
+        defenseLabel.setText(String.valueOf(stats.getDefense()));
+        spAttackBar.setValue(stats.getSpAtk());
+        spAttackLabel.setText(String.valueOf(stats.getSpAtk()));
+        spDefenseBar.setValue(stats.getSpDef());
+        spDefenseLabel.setText(String.valueOf(stats.getSpDef()));
+        speedBar.setValue(stats.getSpeed());
+        speedLabel.setText(String.valueOf(stats.getSpeed()));
+        totalLabel.setText(String.valueOf(stats.getTotal()));
         
     }
-
+    
 }

@@ -10,6 +10,7 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import pokidix.models.Pokemon;
 
 /**
  *
@@ -102,11 +103,11 @@ public class PokeView extends JPanel implements ListCellRenderer<Pokemon> {
         nameLabel.setText(pokemon.getName());
         artworkLabel.setText("");
         artworkLabel.setIcon(pokemon.getArtwork());
-        type1Label.setText(pokemon.getTypes()[0]);
+        type1Label.setText(pokemon.getType().get(0));
         type1Label.setBackground(getColor(type1Label.getText()));
         type2Label.setText("");
-        if (pokemon.getTypes().length == 2) {
-            type2Label.setText(pokemon.getTypes()[1]);
+        if (pokemon.getType().size() == 2) {
+            type2Label.setText(pokemon.getType().get(1));
         }
         type2Label.setBackground(getColor(type2Label.getText()));
     }

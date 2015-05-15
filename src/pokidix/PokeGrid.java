@@ -7,11 +7,11 @@ package pokidix;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ListCellRenderer;
 
 import javax.swing.AbstractListModel;
+import pokidix.models.Pokemon;
+import pokidix.models.PokemonParser;
 
 /**
  *
@@ -235,62 +235,66 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
         listModel = new javax.swing.AbstractListModel() {
             ArrayList<Pokemon> evoluciones = obtainEvolutions(pokemon, posicion);
 
-            public ArrayList<Pokemon> obtainEvolutions(Pokemon pokemon, int posicion) throws FileNotFoundException {
-                ArrayList<Pokemon> data = new JsonToPokemon().crearPokemon();
+            public ArrayList<Pokemon> obtainEvolutions(pokidix.models.Pokemon pokemon, int posicion) throws FileNotFoundException {
+                ArrayList<Pokemon> data = (ArrayList<Pokemon>) PokemonParser.getAllPokemons();
                 ArrayList<Pokemon> evolutions = new ArrayList();
 
-                if (posicion == 0 || posicion == 1 || posicion == 2) {
+                if (pokemon.getEvolution().size() > 0) {
+                    if (posicion == 0 || posicion == 1 || posicion == 2) {
 
-                    if (posicion == 0) {
-                        evolutions.add(data.get(posicion + 1));
-                        evolutions.add(data.get(posicion + 2));
-                    }
-
-                    if (posicion == 1) {
-                        evolutions.add(data.get(posicion - 1));
-                        evolutions.add(data.get(posicion + 1));
-                    }
-
-                    if (posicion == 2) {
-                        evolutions.add(data.get(posicion - 2));
-                        evolutions.add(data.get(posicion - 1));
-                    }
-
-                } else {
-                    if (posicion == 150 || posicion == 149 || posicion == 148) {
-                        for (String evolution : pokemon.getEvolutions()) {
-                            if (evolution.equals(data.get(posicion - 3).getName())) {
-                                evolutions.add(data.get(posicion - 3));
-                            }
-                            if (evolution.equals(data.get(posicion - 2).getName())) {
-                                evolutions.add(data.get(posicion - 2));
-                            }
-                            if (evolution.equals(data.get(posicion - 1).getName())) {
-                                evolutions.add(data.get(posicion - 1));
-                            }
+                        if (posicion == 0) {
+                            evolutions.add(data.get(posicion + 1));
+                            evolutions.add(data.get(posicion + 2));
                         }
+
+                        if (posicion == 1) {
+                            evolutions.add(data.get(posicion - 1));
+                            evolutions.add(data.get(posicion + 1));
+                        }
+
+                        if (posicion == 2) {
+                            evolutions.add(data.get(posicion - 2));
+                            evolutions.add(data.get(posicion - 1));
+                        }
+
                     } else {
-                        for (String evolution : pokemon.getEvolutions()) {
-                            if (evolution.equals(data.get(posicion - 3).getName())) {
-                                evolutions.add(data.get(posicion - 3));
+                        if (posicion == 150 || posicion == 149 || posicion == 148) {
+                            for (String evolution : pokemon.getEvolution()) {
+                                if (evolution.equals(data.get(posicion - 3).getName())) {
+                                    evolutions.add(data.get(posicion - 3));
+                                }
+                                if (evolution.equals(data.get(posicion - 2).getName())) {
+                                    evolutions.add(data.get(posicion - 2));
+                                }
+                                if (evolution.equals(data.get(posicion - 1).getName())) {
+                                    evolutions.add(data.get(posicion - 1));
+                                }
                             }
-                            if (evolution.equals(data.get(posicion - 2).getName())) {
-                                evolutions.add(data.get(posicion - 2));
-                            }
-                            if (evolution.equals(data.get(posicion - 1).getName())) {
-                                evolutions.add(data.get(posicion - 1));
-                            }
-                            if (evolution.equals(data.get(posicion + 1).getName())) {
-                                evolutions.add(data.get(posicion + 1));
-                            }
-                            if (evolution.equals(data.get(posicion + 2).getName())) {
-                                evolutions.add(data.get(posicion + 2));
-                            }
-                            if (evolution.equals(data.get(posicion + 3).getName())) {
-                                evolutions.add(data.get(posicion + 3));
+                        } else {
+                            for (String evolution : pokemon.getEvolution()) {
+                                if (evolution.equals(data.get(posicion - 3).getName())) {
+                                    evolutions.add(data.get(posicion - 3));
+                                }
+                                if (evolution.equals(data.get(posicion - 2).getName())) {
+                                    evolutions.add(data.get(posicion - 2));
+                                }
+                                if (evolution.equals(data.get(posicion - 1).getName())) {
+                                    evolutions.add(data.get(posicion - 1));
+                                }
+                                if (evolution.equals(data.get(posicion + 1).getName())) {
+                                    evolutions.add(data.get(posicion + 1));
+                                }
+                                if (evolution.equals(data.get(posicion + 2).getName())) {
+                                    evolutions.add(data.get(posicion + 2));
+                                }
+                                if (evolution.equals(data.get(posicion + 3).getName())) {
+                                    evolutions.add(data.get(posicion + 3));
+                                }
                             }
                         }
                     }
+                } else {
+                    evolutions.add(new Pokemon());
                 }
 
                 return evolutions;
@@ -311,25 +315,26 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
 
     @Override
     public void setPokemon(Pokemon pokemon) {
-        idLabel.setText("" + pokemon.getId());
+        idLabel.setText(pokemon.getId());
         nameLabel.setText(pokemon.getName());
         artworkLabel.setText("");
         artworkLabel.setIcon(pokemon.getArtwork());
-        type1Label.setText(pokemon.getTypes()[0]);
+        type1Label.setText(pokemon.getType().get(0));
         type1Label.setBackground(getColor(type1Label.getText()));
         type2Label.setText("");
-        if (pokemon.getTypes().length == 2) {
-            type2Label.setText(pokemon.getTypes()[1]);
+        if (pokemon.getType().size() == 2) {
+            type2Label.setText(pokemon.getType().get(1));
+            
         }
         type2Label.setBackground(getColor(type2Label.getText()));
         especieLabel.setText(pokemon.getSpecies());
         alturaLabel.setText(pokemon.getHeight());
         pesoLabel.setText(pokemon.getWeight());
-        habilidad1Label.setText(pokemon.getAbilities()[0]);
-        if (pokemon.getAbilities().length > 1) {
-            habilidad2Label.setText(pokemon.getAbilities()[1]);
-            if (pokemon.getAbilities().length == 3) {
-                habilidad3Label.setText(pokemon.getAbilities()[2]);
+        habilidad1Label.setText(pokemon.getAbilities().get(0));
+        if (pokemon.getAbilities().size() > 1) {
+            habilidad2Label.setText(pokemon.getAbilities().get(1));
+            if (pokemon.getAbilities().size() == 3) {
+                habilidad3Label.setText(pokemon.getAbilities().get(2));
             } else {
                 habilidad3Label.setVisible(false);
             }
@@ -338,16 +343,15 @@ public class PokeGrid extends PokeView implements ListCellRenderer<Pokemon> {
             habilidad3Label.setVisible(false);
         }
         statsPanel1.setPokemon(pokemon);
-        if (pokemon.getEvolutions().length != 0) {
-            try {
-                evolutionList.setModel(createModel(pokemon, Integer.parseInt(pokemon.getId()) - 1));
+        try {
+            evolutionList.setModel(createModel(pokemon, Integer.parseInt(pokemon.getId()) - 1));
+            if (pokemon.getEvolution().size() > 0) {
                 evolutionList.setCellRenderer(new evolutionPanel());
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(PokeGrid.class.getName()).log(Level.SEVERE, null, ex);
+                evolutionList.setPreferredSize(new evolutionPanel().getPreferredSize());
+            } else {
+                evolutionList.setCellRenderer(new NoEvolutionFound());
             }
-        } else {
-            evolutionList.setCellRenderer(new NoEvolutionFound());
-        }
+        } catch (FileNotFoundException ex) {}
     }
 
 }
