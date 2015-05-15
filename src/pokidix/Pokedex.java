@@ -9,11 +9,14 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -88,7 +91,8 @@ public class Pokedex extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pokemonList = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jLabel1 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
+        searchField = new javax.swing.JTextField();
 
         jLabel9.setText("jLabel5");
 
@@ -112,7 +116,13 @@ public class Pokedex extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(pokemonList);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\TOSHIBA\\Documents\\Pokedex\\pokidix\\resources\\logo.png")); // NOI18N
+        titleLabel.setIcon(new ImageIcon(new File("resources/logo.png").getAbsolutePath()));
+
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,8 +132,10 @@ public class Pokedex extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(71, 71, 71)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -139,8 +151,13 @@ public class Pokedex extends javax.swing.JFrame {
                         .addGap(94, 94, 94)
                         .addComponent(pokemonContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -152,6 +169,14 @@ public class Pokedex extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        try {
+            pokemonList.setModel(createCurrentModel(searchField.getText()));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Pokedex.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_searchFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,12 +223,47 @@ public class Pokedex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pokemonContainer;
     private javax.swing.JList pokemonList;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
+    public AbstractListModel createCurrentModel(String name) throws FileNotFoundException {
+        AbstractListModel listModel2 = new javax.swing.AbstractListModel() {
+            ArrayList<Pokemon> evoluciones = obtainPokemonByName(name);
+
+            public ArrayList<Pokemon> obtainPokemonByName(String name) throws FileNotFoundException {
+                ArrayList<Pokemon> data = new JsonToPokemon().crearPokemon();
+                ArrayList<Pokemon> pokes = new ArrayList();
+
+                for (Pokemon data1 : data) {
+                    if (data1.getName().toLowerCase().contains(name.toLowerCase())) {
+                        pokes.add(data1);
+                    }
+                }
+                
+                if (pokes.isEmpty()) {
+                    JOptionPane.showMessageDialog(Pokedex.this, "No se encontraron resultados", "Resultados de la búsqueda", JOptionPane.PLAIN_MESSAGE);
+                    return data;
+                }
+
+                return pokes;
+            }
+
+            @Override
+            public int getSize() {
+                return evoluciones.size();
+            }
+
+            @Override
+            public Object getElementAt(int i) {
+                return evoluciones.get(i);
+            }
+        };
+        return listModel2;
+    }
 }

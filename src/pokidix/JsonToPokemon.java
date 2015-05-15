@@ -63,23 +63,28 @@ public class JsonToPokemon {
         return normalizado;
     }
 
-    public JsonArray parseJson() {
-        JsonParser parser = new JsonParser();
+//    public JsonArray parseJson() {
+//        JsonParser parser = new JsonParser();
+//
+//        JsonArray array = null;
+//        try {
+//            array = (JsonArray) parser.parse(new FileReader(new File("resources/pokemon.json").getAbsolutePath()));
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(JsonToPokemon.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        return array;
+//    }
 
-        JsonArray array = null;
+    public ArrayList<Pokemon> crearPokemon(){
+
+        JsonParser parser = new JsonParser();
+        JsonArray a= null;
         try {
-            array = (JsonArray) parser.parse(new FileReader(new File("resources/pokemon.json").getAbsolutePath()));
+            a = (JsonArray) parser.parse(new FileReader(new File("resources/pokemon.json").getAbsolutePath()));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(JsonToPokemon.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return array;
-    }
-
-    public ArrayList<Pokemon> crearPokemon() throws FileNotFoundException {
-
-        JsonParser parser = new JsonParser();
-        JsonArray a = (JsonArray) parser.parse(new FileReader(new File("resources/pokemon.json").getAbsolutePath()));
+        
+        }        
         ArrayList<Pokemon> Pokemans = new ArrayList();
         for (Object o : a) {
             JsonObject poke = (JsonObject) o;
